@@ -8,5 +8,4 @@ public class HomeViewModel extends ViewModel {
 
     public HomeViewModel() {
     }
-
 }
