@@ -2,8 +2,6 @@ package eduarto.castro.venadostest.ui.stats;
 
 import androidx.annotation.NonNull;
 
-import java.util.List;
-
 import eduarto.castro.venadostest.Model.Stat.StatsList;
 import eduarto.castro.venadostest.Model.Stat.StatsResponse;
 import eduarto.castro.venadostest.network.ApiClient;

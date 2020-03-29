@@ -26,23 +26,17 @@ public class StatsFragment extends Fragment implements StatsView{
     private RecyclerView statsRecyclerView;
     private StatsPresenter presenter;
     private StatsAdapter adapter;
-    List<Stats> stats;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_stats, container, false);
-        return root;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_stats, container, false);
         statsRecyclerView = view.findViewById(R.id.stats_rv);
         statsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         presenter = new StatsPresenter(this);
         presenter.getData();
 
-
+        return view;
     }
 
     @Override

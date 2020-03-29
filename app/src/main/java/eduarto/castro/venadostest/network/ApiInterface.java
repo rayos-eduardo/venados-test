@@ -1,8 +1,5 @@
 package eduarto.castro.venadostest.network;
 
-import java.util.List;
-
-import eduarto.castro.venadostest.Model.Game.Game;
 import eduarto.castro.venadostest.Model.Game.GameResponse;
 import eduarto.castro.venadostest.Model.Stat.StatsResponse;
 import retrofit2.Call;
@@ -18,4 +15,8 @@ public interface ApiInterface {
     @Headers( {"Accept: application/json" })
     @GET("statistics")
     Call<StatsResponse> getStats();
+
+    @Headers( {"Accept: application/json" })
+    @GET("players")
+    Call<eduarto.castro.venadostest.Model.Player.PlayersResponse> getPlayers();
 }

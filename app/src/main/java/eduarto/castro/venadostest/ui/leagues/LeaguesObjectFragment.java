@@ -24,13 +24,12 @@ import eduarto.castro.venadostest.adapter.LeaguesRecyclerAdapter;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class LeaguesObjectFragment extends Fragment implements GameListContract.View, CalendarClickListener {
+public class LeaguesObjectFragment extends Fragment implements CalendarClickListener {
     public static final String ARG_OBJECT = "object";
 
     RecyclerView leagueRecyclerView;
     SwipeRefreshLayout leagueSwipeRefresh;
 
-    GameListContract.Presenter presenter;
     LeaguesRecyclerAdapter adapter;
     private ArrayList<Game> gameList;
     CalendarClickListener calendarClickListener;
@@ -47,41 +46,11 @@ public class LeaguesObjectFragment extends Fragment implements GameListContract.
 
         leagueSwipeRefresh = view.findViewById(R.id.league_sr);
         leagueRecyclerView = view.findViewById(R.id.league_rv);
-        //adapter = new LeaguesRecyclerAdapter(getContext(), gameList, calendarClickListener);
         leagueRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //leagueRecyclerView.setAdapter(adapter);
-
-        presenter = new GameListPresenter(this);
-        presenter.requestDataFromServer();
     }
 
     @Override
     public void onCalendarClick(View view, int position) {
         Toast.makeText(getContext(),"Cal",Toast.LENGTH_SHORT).show();
     }
-
-    @Override
-    public void showProgress() {
-        leagueSwipeRefresh.setRefreshing(true);
-    }
-
-    @Override
-    public void hideProgress() {
-        leagueSwipeRefresh.setRefreshing(false);
-    }
-
-    @Override
-    public void setDataToRecyclerView(ArrayList<Game> gameArrayList) {
-        adapter = new LeaguesRecyclerAdapter(getContext(), gameArrayList, calendarClickListener);
-        adapter.notifyDataSetChanged();
-        leagueRecyclerView.setAdapter(adapter);
-    }
-
-
-    @Override
-    public void onResponseFailure(Throwable throwable) {
-        Log.e(TAG, throwable.getMessage());
-        Toast.makeText(getContext(),String.valueOf(throwable), Toast.LENGTH_LONG).show();
-    }
-
 }

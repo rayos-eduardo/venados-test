@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/txt_player_details_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:text="FICHA TÉCNICA"
+        android:textStyle="bold"
+        />
+
+    <ImageView
+        android:id="@+id/player_details_iv"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/txt_player_details_header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/player_details_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/player_details_iv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        tools:text="Carlos Vela" />
+    <TextView
+        android:id="@+id/player_details_position_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/player_details_name_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        tools:text="Delantero"
+        />
+    <TextView
+        android:id="@+id/player_details_birthday_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:text="FECHA DE NACIMIENTO"
+        android:layout_below="@+id/player_details_position_tv"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/player_details_birthday_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:textSize="16sp"
+        tools:text="21/3/1996"
+        android:layout_below="@+id/player_details_birthday_tag"
+        />
+    <TextView
+        android:id="@+id/player_details_birthplace_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:text="LUGAR DE NACIMIENTO"
+        android:layout_below="@+id/player_details_birthday_tv"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/player_details_birthplace_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:textSize="16sp"
+        tools:text="Estado de Yucatán"
+        android:layout_below="@+id/player_details_birthplace_tag"
+        />
+    <TextView
+        android:id="@+id/player_details_weight_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:text="PESO"
+        android:layout_below="@+id/player_details_birthplace_tv"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/player_details_weight_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:textSize="16sp"
+        tools:text="88 KG"
+        android:layout_below="@+id/player_details_weight_tag"
+        />
+    <TextView
+        android:id="@+id/player_details_height_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:text="ALTURA"
+        android:layout_below="@+id/player_details_weight_tv"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/player_details_height_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:textSize="16sp"
+        tools:text="1.70 m KG"
+        android:layout_below="@+id/player_details_height_tag"
+        />
+    <TextView
+        android:id="@+id/player_details_previous_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:text="EQUIPO ANTERIOR"
+        android:layout_below="@+id/player_details_height_tv"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/player_details_previous_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:textSize="16sp"
+        tools:text="Cruz Azul"
+        android:layout_below="@+id/player_details_previous_tag"
+        />
+
+</RelativeLayout>
