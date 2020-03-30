@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -22,6 +23,7 @@ import eduarto.castro.venadostest.adapter.LeaguesTabAdapter;
 public class HomeFragment extends Fragment implements GamesView {
 
     private LeaguesTabAdapter leaguesTabAdapter;
+
     private GamesPresenter gamesPresenter;
     private ViewPager2 pager;
     private TabLayout tabLayout;

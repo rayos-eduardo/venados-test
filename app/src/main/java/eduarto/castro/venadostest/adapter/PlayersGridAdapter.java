@@ -47,21 +47,26 @@ public class PlayersGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v;
         if (view == null) {
+            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             assert layoutInflater != null;
-            view = layoutInflater.inflate(R.layout.item_players, null);
-            ImageView playerImage = view.findViewById(R.id.player_iv);
-            TextView playerName = view.findViewById(R.id.player_name_tv);
-            TextView playerPosition = view.findViewById(R.id.player_position_tv);
-
-            String fullName = players.get(i).getName() + " " + players.get(i).getFirstSurname();
-
-            Glide.with(context).load(players.get(i).getPlayerImage()).circleCrop().diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.5f).into(playerImage);
-            playerName.setText(fullName);
-            playerPosition.setText(players.get(i).getPosition() == null ? players.get(i).getRole() : players.get(i).getPosition());
+            v = layoutInflater.inflate(R.layout.item_players, null);
+        }
+        else {
+            v = view;
         }
 
-        return view;
+        ImageView playerImage = v.findViewById(R.id.player_iv);
+        TextView playerName = v.findViewById(R.id.player_name_tv);
+        TextView playerPosition = v.findViewById(R.id.player_position_tv);
+
+        String fullName = players.get(i).getName() + " " + players.get(i).getFirstSurname();
+
+        Glide.with(context).load(players.get(i).getPlayerImage()).circleCrop().diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.5f).into(playerImage);
+        playerName.setText(fullName);
+        playerPosition.setText(players.get(i).getPosition() == null ? players.get(i).getRole() : players.get(i).getPosition());
+
+        return v;
     }
 }

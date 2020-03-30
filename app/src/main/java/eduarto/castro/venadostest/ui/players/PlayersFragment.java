@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import eduarto.castro.venadostest.Model.Player.Player;
 import eduarto.castro.venadostest.R;
@@ -27,8 +26,6 @@ public class PlayersFragment extends Fragment implements PlayersView{
     private GridView playersGridView;
     private PlayersGridAdapter playersGridAdapter;
     private PlayersPresenter playersPresenter;
-    PlayersDetailsDialog playersDetailsDialog = new PlayersDetailsDialog();
-    private List<Player> players;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,7 +64,6 @@ public class PlayersFragment extends Fragment implements PlayersView{
     @Override
     public void onGetResult(ArrayList<Player> players) {
         playersGridAdapter = new PlayersGridAdapter(context, players);
-        playersGridAdapter.notifyDataSetChanged();
         playersGridView.setAdapter(playersGridAdapter);
     }
 

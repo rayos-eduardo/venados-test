@@ -25,14 +25,15 @@ public class LeaguesTabAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
 
+        int league = 0;
         List<Game> tabGames = new ArrayList<>();
         tabGames.clear();
 
         switch (position){
-
             case 0:
                 for (int i=0; i<games.size(); i++){
                     if (games.get(i).getLeague().equals("Copa MX")){
+                        league = 0;
                         tabGames.add(games.get(i));
                     }
                 }
@@ -40,13 +41,14 @@ public class LeaguesTabAdapter extends FragmentStateAdapter {
             case 1:
                 for (int i=0; i<games.size(); i++){
                     if (games.get(i).getLeague().equals("Ascenso MX")){
+                        league = 1;
                         tabGames.add(games.get(i));
                     }
                 }
                 break;
         }
 
-        return new GamesFragment(tabGames);
+        return new GamesFragment(tabGames, league);
     }
 
     @Override
