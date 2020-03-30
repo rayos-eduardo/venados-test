@@ -39,7 +39,7 @@ public class GamesFragment extends Fragment {
         gameRecyclerView = view.findViewById(R.id.league_rv);
         gameRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        gamesRecyclerAdapter = new GamesRecyclerAdapter(getContext(), gameList);
+        gamesRecyclerAdapter = new GamesRecyclerAdapter(getContext(), gameList, getActivity());
         gamesRecyclerAdapter.notifyDataSetChanged();
         gameRecyclerView.setAdapter(gamesRecyclerAdapter);
 

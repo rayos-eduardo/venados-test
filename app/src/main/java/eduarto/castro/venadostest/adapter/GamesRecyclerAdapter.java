@@ -1,12 +1,13 @@
 package eduarto.castro.venadostest.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +17,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -28,6 +31,8 @@ public class GamesRecyclerAdapter extends RecyclerView.Adapter<GamesRecyclerAdap
 
     private Context context;
     private List<Game> games;
+    String gameName;
+    Activity activity;
 
     Locale spanish = new Locale("es", "MX");
     SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+SS:SS");
@@ -35,9 +40,10 @@ public class GamesRecyclerAdapter extends RecyclerView.Adapter<GamesRecyclerAdap
     SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", spanish);
     SimpleDateFormat weekFormat = new SimpleDateFormat("EEE", spanish);
 
-    public GamesRecyclerAdapter(Context context, List<Game> games) {
+    public GamesRecyclerAdapter(Context context, List<Game> games, Activity activity) {
         this.context = context;
         this.games = games;
+        this.activity = activity;
     }
 
     @NonNull
@@ -69,12 +75,17 @@ public class GamesRecyclerAdapter extends RecyclerView.Adapter<GamesRecyclerAdap
         String dayString = dayFormat.format(Objects.requireNonNull(date));
         String month = monthFormat.format(Objects.requireNonNull(date));
         String week = weekFormat.format(Objects.requireNonNull(date));
-
+        gameName = "Partido Venados F.C vs " + game.getOpponent();
 
         holder.day.setText(dayString.toUpperCase());
         holder.weekDay.setText(week);
         holder.homeScore.setText(String.valueOf(game.getHomeScore()));
         holder.awayScore.setText(String.valueOf(game.getAwayScore()));
+        Date finalDate = date;
+
+        holder.calendar.setOnClickListener(view -> {
+            setEvent(finalDate);
+        });
 
         if (holder.ViewType == 0){
             holder.monthSep.setText(month.toUpperCase());
@@ -133,6 +144,18 @@ public class GamesRecyclerAdapter extends RecyclerView.Adapter<GamesRecyclerAdap
         }
     }
 
+    public  void setEvent(Date date)
+    {
+        Calendar calendarValue = new GregorianCalendar();
+        calendarValue.setTime(date);
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setType("vnd.android.cursor.item/event");
+        intent.putExtra("beginTime", calendarValue.getTimeInMillis());
+        intent.putExtra("endTime", calendarValue.getTimeInMillis()+5400000);
+        intent.putExtra("title", gameName);
+        activity.startActivity(intent);
+    }
+
     public class leaguesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         int ViewType;
         private ImageView calendar;
@@ -181,9 +204,7 @@ public class GamesRecyclerAdapter extends RecyclerView.Adapter<GamesRecyclerAdap
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == calendar.getId()){
-                Toast.makeText(context,"Calendario", Toast.LENGTH_SHORT).show();
-            }
+
         }
     }
 
