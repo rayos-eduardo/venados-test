@@ -57,16 +57,19 @@ public class PlayersDetailsDialog extends DialogFragment {
         }
 
         String Birthday = targetFormat.format(Objects.requireNonNull(date));
+        String fullName = player.getName() + " " + player.getFirstSurname();
+        String weight = player.getWeight() + " kg";
+        String height = player.getHeight() + " m";
 
         if (isAdded()){
             if (player != null){
                 Glide.with(context).load(player.getPlayerImage()).circleCrop().diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.5f).into(playerDetailsImage);
-                playerDetailsName.setText(player.getName());
+                playerDetailsName.setText(fullName);
                 playerDetailsPosition.setText(player.getPosition() == null ? player.getRole() : player.getPosition());
                 playerDetailsBirthday.setText(Birthday);
                 playerDetailsBirthPlace.setText(player.getBirthPlace());
-                playerDetailsWeight.setText(String.valueOf(player.getWeight()));
-                playerDetailsHeight.setText(String.valueOf(player.getHeight()));
+                playerDetailsWeight.setText(weight);
+                playerDetailsHeight.setText(height);
                 playerDetailsPreviousTeam.setText(player.getLastTeam());
             }
         }

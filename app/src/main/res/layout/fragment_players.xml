@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_gravity="center"
     tools:context=".ui.players.PlayersFragment">
 
     <GridView
@@ -13,9 +14,9 @@
         android:layout_height="match_parent"
         android:numColumns="3"
         android:gravity="center"
-        android:columnWidth="100dp"
+        android:columnWidth="150dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp"/>
+        android:verticalSpacing="20dp"/>
 </LinearLayout>

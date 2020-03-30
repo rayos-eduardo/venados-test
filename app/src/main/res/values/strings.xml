@@ -14,4 +14,10 @@
     <string name="juegos_jugados">JJ</string>
     <string name="diferencia_goles">DG</string>
     <string name="puntos">PTS</string>
+    <string name="ficha_tecnica">FICHA TÉCNICA</string>
+    <string name="fecha_de_nacimiento">FECHA DE NACIMIENTO</string>
+    <string name="lugar_de_nacimiento">LUGAR DE NACIMIENTO</string>
+    <string name="peso">PESO</string>
+    <string name="altura">ALTURA</string>
+    <string name="equipo_anterior">EQUIPO ANTERIOR</string>
 </resources>
