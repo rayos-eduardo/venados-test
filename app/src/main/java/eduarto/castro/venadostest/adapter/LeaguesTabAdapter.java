@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import eduarto.castro.venadostest.Model.Game.Game;
@@ -23,7 +24,29 @@ public class LeaguesTabAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return new GamesFragment(games);
+
+        List<Game> tabGames = new ArrayList<>();
+        tabGames.clear();
+
+        switch (position){
+
+            case 0:
+                for (int i=0; i<games.size(); i++){
+                    if (games.get(i).getLeague().equals("Copa MX")){
+                        tabGames.add(games.get(i));
+                    }
+                }
+                break;
+            case 1:
+                for (int i=0; i<games.size(); i++){
+                    if (games.get(i).getLeague().equals("Ascenso MX")){
+                        tabGames.add(games.get(i));
+                    }
+                }
+                break;
+        }
+
+        return new GamesFragment(tabGames);
     }
 
     @Override

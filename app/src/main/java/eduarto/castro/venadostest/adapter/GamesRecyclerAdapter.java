@@ -14,7 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 import eduarto.castro.venadostest.Model.Game.Game;
 import eduarto.castro.venadostest.R;
@@ -24,6 +29,12 @@ public class GamesRecyclerAdapter extends RecyclerView.Adapter<GamesRecyclerAdap
     private Context context;
     private List<Game> games;
 
+    Locale spanish = new Locale("es", "MX");
+    SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+SS:SS");
+    SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
+    SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", spanish);
+    SimpleDateFormat weekFormat = new SimpleDateFormat("EEE", spanish);
+
     public GamesRecyclerAdapter(Context context, List<Game> games) {
         this.context = context;
         this.games = games;
@@ -32,16 +43,42 @@ public class GamesRecyclerAdapter extends RecyclerView.Adapter<GamesRecyclerAdap
     @NonNull
     @Override
     public GamesRecyclerAdapter.leaguesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      View view = LayoutInflater.from(context).inflate(R.layout.item_games, parent, false);
-      return new leaguesViewHolder(view);
+      View view = null;
+      switch (viewType){
+          case 0:
+              view = LayoutInflater.from(context).inflate(R.layout.item_month_sep, parent, false);
+              break;
+          case 1:
+              view = LayoutInflater.from(context).inflate(R.layout.item_games, parent, false);
+              break;
+      }
+      return new leaguesViewHolder(view, viewType);
     }
 
     @Override
     public void onBindViewHolder(@NonNull GamesRecyclerAdapter.leaguesViewHolder holder, int position) {
         Game game = games.get(position);
+        
+        Date date = null;
+        try {
+            date = originalFormat.parse(game.getDatetime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        String dayString = dayFormat.format(Objects.requireNonNull(date));
+        String month = monthFormat.format(Objects.requireNonNull(date));
+        String week = weekFormat.format(Objects.requireNonNull(date));
+
+
+        holder.day.setText(dayString.toUpperCase());
+        holder.weekDay.setText(week);
         holder.homeScore.setText(String.valueOf(game.getHomeScore()));
         holder.awayScore.setText(String.valueOf(game.getAwayScore()));
+
+        if (holder.ViewType == 0){
+            holder.monthSep.setText(month.toUpperCase());
+        }
 
         if (game.isLocal()){
             Glide.with(context).load(R.mipmap.venados_escudo).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.homeImage);
@@ -62,7 +99,42 @@ public class GamesRecyclerAdapter extends RecyclerView.Adapter<GamesRecyclerAdap
         return games.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0) {
+            return 0;
+        }
+        else
+        {
+            String lastMonth = null;
+            Date date = null;
+            try {
+                date = originalFormat.parse(games.get(position).getDatetime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            String month = monthFormat.format(Objects.requireNonNull(date));
+
+            if (position > 0) {
+                Date lastDate = null;
+                try {
+                    lastDate = originalFormat.parse(games.get(position - 1).getDatetime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                lastMonth = monthFormat.format(Objects.requireNonNull(lastDate));
+            }
+
+            if (month.equals(lastMonth)) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+    }
+
     public class leaguesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        int ViewType;
         private ImageView calendar;
         private TextView day;
         private TextView weekDay;
@@ -72,19 +144,39 @@ public class GamesRecyclerAdapter extends RecyclerView.Adapter<GamesRecyclerAdap
         private TextView awayScore;
         private ImageView awayImage;
         private TextView awayName;
+        
+        private TextView monthSep;
 
-        public leaguesViewHolder(View view){
+        public leaguesViewHolder(View view, int viewType){
             super(view);
-
-            calendar = view.findViewById(R.id.calendar_button);
-            day = view.findViewById(R.id.day_tv);
-            weekDay = view.findViewById(R.id.weekday_tv);
-            homeImage = view.findViewById(R.id.home_image);
-            homeName = view.findViewById(R.id.home_tv);
-            homeScore = view.findViewById(R.id.home_score_tv);
-            awayScore = view.findViewById(R.id.away_score_tv);
-            awayImage = view.findViewById(R.id.away_image);
-            awayName = view.findViewById(R.id.away_tv);
+            
+            switch (viewType){
+                case 0:
+                    monthSep = view.findViewById(R.id.month_sep);
+                    calendar = view.findViewById(R.id.calendar_button);
+                    day = view.findViewById(R.id.day_tv);
+                    weekDay = view.findViewById(R.id.weekday_tv);
+                    homeImage = view.findViewById(R.id.home_image);
+                    homeName = view.findViewById(R.id.home_tv);
+                    homeScore = view.findViewById(R.id.home_score_tv);
+                    awayScore = view.findViewById(R.id.away_score_tv);
+                    awayImage = view.findViewById(R.id.away_image);
+                    awayName = view.findViewById(R.id.away_tv);
+                    ViewType = 0;
+                    break;
+                case 1:
+                    calendar = view.findViewById(R.id.calendar_button);
+                    day = view.findViewById(R.id.day_tv);
+                    weekDay = view.findViewById(R.id.weekday_tv);
+                    homeImage = view.findViewById(R.id.home_image);
+                    homeName = view.findViewById(R.id.home_tv);
+                    homeScore = view.findViewById(R.id.home_score_tv);
+                    awayScore = view.findViewById(R.id.away_score_tv);
+                    awayImage = view.findViewById(R.id.away_image);
+                    awayName = view.findViewById(R.id.away_tv);
+                    ViewType = 1;
+                    break;
+            }
         }
 
         @Override
