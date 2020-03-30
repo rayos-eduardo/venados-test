@@ -7,7 +7,7 @@ import java.util.List;
 
 public class GamesList {
     @SerializedName("games")
-    private ArrayList<Game> gamesList;
+    private List<Game> gamesList;
 
     public GamesList() {}
 
@@ -15,7 +15,7 @@ public class GamesList {
         this.gamesList = gamesList;
     }
 
-    public ArrayList<Game> getGames() {
+    public List<Game> getGames() {
         return gamesList;
     }
 

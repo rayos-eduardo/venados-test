@@ -1,4 +1,4 @@
-package eduarto.castro.venadostest.ui.leagues;
+package eduarto.castro.venadostest.ui.home.games;
 
 import android.view.View;
 

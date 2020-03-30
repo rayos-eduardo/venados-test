@@ -8,47 +8,40 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import eduarto.castro.venadostest.Model.Game.Game;
 import eduarto.castro.venadostest.R;
-import eduarto.castro.venadostest.network.ApiClient;
-import eduarto.castro.venadostest.ui.leagues.CalendarClickListener;
-import eduarto.castro.venadostest.ui.leagues.LeaguesObjectFragment;
 
-public class LeaguesRecyclerAdapter extends RecyclerView.Adapter<LeaguesRecyclerAdapter.leaguesViewHolder>{
+public class GamesRecyclerAdapter extends RecyclerView.Adapter<GamesRecyclerAdapter.leaguesViewHolder>{
 
     private Context context;
-    private ArrayList<Game> games;
-    private CalendarClickListener calendarClickListener;
+    private List<Game> games;
 
-    public LeaguesRecyclerAdapter(Context context, ArrayList<Game> games, CalendarClickListener calendarClickListener) {
+    public GamesRecyclerAdapter(Context context, List<Game> games) {
         this.context = context;
         this.games = games;
-        this.calendarClickListener = calendarClickListener;
     }
 
     @NonNull
     @Override
-    public LeaguesRecyclerAdapter.leaguesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_games, parent, false);
+    public GamesRecyclerAdapter.leaguesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+      View view = LayoutInflater.from(context).inflate(R.layout.item_games, parent, false);
       return new leaguesViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LeaguesRecyclerAdapter.leaguesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GamesRecyclerAdapter.leaguesViewHolder holder, int position) {
         Game game = games.get(position);
 
-        holder.homeScore.setText(game.getHomeScore());
-        holder.awayScore.setText(game.getAwayScore());
+        holder.homeScore.setText(String.valueOf(game.getHomeScore()));
+        holder.awayScore.setText(String.valueOf(game.getAwayScore()));
 
         if (game.isLocal()){
             Glide.with(context).load(R.mipmap.venados_escudo).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.homeImage);
@@ -97,7 +90,6 @@ public class LeaguesRecyclerAdapter extends RecyclerView.Adapter<LeaguesRecycler
         @Override
         public void onClick(View view) {
             if (view.getId() == calendar.getId()){
-                calendarClickListener.onCalendarClick(view, getAdapterPosition());
                 Toast.makeText(context,"Calendario", Toast.LENGTH_SHORT).show();
             }
         }

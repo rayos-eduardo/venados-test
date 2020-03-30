@@ -6,27 +6,31 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import eduarto.castro.venadostest.ui.leagues.LeaguesObjectFragment;
+import java.util.List;
+
+import eduarto.castro.venadostest.Model.Game.Game;
+import eduarto.castro.venadostest.ui.home.GamesFragment;
 
 public class LeaguesTabAdapter extends FragmentStateAdapter {
 
-    public LeaguesTabAdapter(@NonNull Fragment fragment) {
+    private List<Game> games;
+
+    public LeaguesTabAdapter(@NonNull Fragment fragment, List<Game> games) {
         super(fragment);
+        this.games = games;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        Fragment fragment = new LeaguesObjectFragment();
-        Bundle args = new Bundle();
-        args.putInt(LeaguesObjectFragment.ARG_OBJECT, position + 1);
-        fragment.setArguments(args);
-        return fragment;
+        return new GamesFragment(games);
     }
 
     @Override
     public int getItemCount() {
         return 2;
     }
+
+
 }
 
